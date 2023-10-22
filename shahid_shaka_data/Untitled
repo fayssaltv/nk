@@ -1,0 +1,56 @@
+
+        !(function(){
+            var paAnalytics = paAnalytics || [];
+
+            var loadScript = function(url, onLoad){
+                var script = document.createElement('script');
+                script.setAttribute('src', url);
+                script.onload = onLoad;
+                var target = document.getElementsByTagName('head')[0];
+                target.insertBefore(script, target.firstChild);
+                script.onerror = function (error) {
+                    paAnalytics.push([
+                        'track',
+                        {eventName:'adTagError', properties: {errCode:2}}
+                    ]);
+                };
+            };
+
+            var config = {"_id":"614ae6cc4bb50278ff7c8ab0","paid":16863,"anid":22671656,"placement_name":"elahmad.com_PAsticky-desktop_300x250-300x600-336x280","publisher_id":1779744,"site_id":5104420,"size":"300x250","tag_type":"prebid","hbConf":{"bidders":[{"type":"appnexus","params":"{\"placementId\":\"22671656\"}"},{"type":"smart","params":"{\"pageId\":\"1469779\",\"formatId\":\"47772\",\"isSecure\":true,\"siteId\":\"355224\"}"},{"type":"pubmatic","params":"{\"adSlot\":\"4053965@300x250\"}"},{"type":"onetag","params":"{\"placement_name\":22671656}"},{"type":"adform","params":"{\"mid\":\"1412051\"}"},{"type":"criteo","params":"{\"zoneId\":\"1367033\",\"publisherSubId\":22671656}"},{"type":"criteo","params":"{\"zoneId\":\"1367035\",\"publisherSubId\":22671656}"},{"type":"criteo","params":"{\"zoneId\":\"1367038\",\"publisherSubId\":22671656}"},{"type":"adagio","params":"{\"useAdUnitCodeAsAdUnitElementId\":\"1\",\"environment\":\"desktop\",\"placement\":22671656,\"site\":\"elahmad-com\"}"}],"psbk":"<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap\" rel=\"stylesheet\">\n  <script>\n    function main (config) {\n      const loadTbScript = function (url, onLoad) {\n        const script = document.createElement('script');\n        script.setAttribute('src', url);\n        script.onload = onLoad;\n        const target = document.getElementsByTagName('head')[0];\n        target.insertBefore(script, target.firstChild);\n      };\n      config.currentScript = document.currentScript;\n      if (typeof TBv2 === \"function\") {\n        const myTBv2Ad = new TBv2(config);\n        myTBv2Ad.serveTaboola();\n      } else {\n        loadTbScript('https://cdn.projectagora-adtag-library.com/native/latest/native.min.js', function () {\n          const myTBv2Ad = new TBv2(config);\n          myTBv2Ad.serveTaboola();\n        });\n      }\n    }\n    main({\n    \"taboolaString\": \"elahmad300x250mena-r22671656\",\n   \"options\": {\n        \"noStyle\": false,\n        \"button\": {\n            \"text\": \"ar\"\n        }\n    }\n})\n</script>","timeout":2000,"adxPsbkType":"no_psbk"},"isInArticle":false,"promoSizes":"336x280,300x600","analytics":{},"floorsConf":{"rules":[],"currency":"EUR","active":false,"floorDeals":false},"arf":{},"placement_site_info":[{"sco":{"paSellerId":"105687","paOwns":"Owned & Operated"}}],"arfAdTag":{"_id":"62c3f09898d8b4de460a00b9","paid":21822,"anid":26483971,"placement_name":"elahmad.com_paadrefresh_320x50","publisher_id":1779744,"site_id":5104420,"size":"320x50","promoSizes":"320x100,300x50,300x250,300x600,336x280","tag_type":"prebid","hbConf":{"bidders":[{"type":"appnexus","params":"{\"placementId\":\"26483971\"}"},{"type":"onetag","params":"{\"placement_name\":\"26483971\"}"},{"type":"adform","params":"{\"mid\":\"1505685\"}"},{"type":"pubmatic","params":"{\"adSlot\":\"4569766@320x50\"}"},{"type":"smart","params":"{\"pageId\":\"1631765\",\"formatId\":\"49692\",\"isSecure\":true,\"siteId\":\"355224\"}"}],"psbk":"","timeout":2000,"adxPsbkType":"no_psbk","hb":{"enable_amazon":false,"slot_name":""}},"floorsConf":{"rules":[],"currency":"EUR","default":0.05,"active":true,"floorDeals":false},"isInArticle":false,"placement_site_info":[{"sco":{"paSellerId":"105687","paOwns":"Owned & Operated"}}]}};
+            config['currentScript'] = document.currentScript ? document.currentScript : null;
+
+            if (config.analytics && config.analytics != {} && config.analytics.trackEnabled) {
+                paAnalytics.push([
+                    'init',
+                    config.analytics
+                ]);
+                paAnalytics.push(['track', { eventName: 'adtagLoaded' }]);
+
+                loadScript(
+                    'https://cdn.projectagora-analytics-library.com/main/latest/analytics.min.js',
+                    function () {
+                        if (typeof paAnalytics !== 'undefined') {
+                            var temp = paAnalytics.slice();
+                            paAnalytics = new analytics.PaAnalytics();
+                            paAnalytics.push.apply(paAnalytics, temp);
+                        } else {
+                            paAnalytics = new analytics.PaAnalytics();
+                        }
+                    }
+                );
+            }
+
+            if (typeof PAv2 === 'function'){
+                paAnalytics.push(['track', { eventName: 'adtagStarted' }]);
+                config.analytics = paAnalytics;
+                var myPAv2Ad = new PAv2(config);
+                myPAv2Ad.display();
+            }else {
+                loadScript('https://cdn.projectagora-adtag-library.com/adtag/latest/pav2.min.js',function(){
+                    paAnalytics.push(['track', { eventName: 'adtagStarted' }]);
+                    config.analytics = paAnalytics;
+                    var myPAv2Ad = new PAv2(config);
+                    myPAv2Ad.display();
+                });
+            }
+        })();
